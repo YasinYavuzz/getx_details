@@ -4,8 +4,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getx_class/controller.dart';
 import 'package:getx_class/sayfa1.dart';
 
+import 'localization.dart';
+
 void main() async{
-  await GetStorage.init(); // Burada get Storage init etmemiz gerekiyor.
+  await GetStorage.init(); // Burada get Storage init etmemiz gerekiyor. Burada GetStorage çalıştırıyoruz
   runApp(const MyApp());
 }
 
@@ -19,19 +21,24 @@ class MyApp extends StatelessWidget {
     // sayfa geçişlerinin olması yani contextlere ulaşması için
     // Get material app ile sarıyoruz
     return GetMaterialApp(
+      // Dil ayarları için eklememiz gereken bazı ayarlar
+      translations: Languages(),
+      // locale: const Locale('tr','TR'), => bu bizim local olarak verdiğimiz
+      locale: Get.deviceLocale, // bu da cihazın diline göre gelen ayar
+      fallbackLocale: const Locale('en','US'),
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-   MyHomePage({super.key, required this.title});
+   MyHomePage({super.key});
 
-  final String title;
+  // final String title;
 
 //   RxInt _counter = RxInt(0); 
 //  // observable 
@@ -49,7 +56,7 @@ class MyHomePage extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text('Get X'),
       ),
       body: Center(
         
@@ -57,6 +64,7 @@ class MyHomePage extends StatelessWidget {
         
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('hi'.tr),            
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -66,6 +74,10 @@ class MyHomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
+            ElevatedButton(onPressed: () {
+            Get.updateLocale(Locale('tr','TR'));
+            // Get.to(Sayfa1(),transition: Transition.downToUp);
+          }, child: const Text('Dil Değiş')),
             ElevatedButton(onPressed: () {
             // get ile sayfa geçişi
             // animasyonlu geçişte verebiliriz (transition parametresi)

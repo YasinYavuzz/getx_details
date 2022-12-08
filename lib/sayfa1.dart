@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'controller.dart';
 class Sayfa1 extends StatelessWidget {
-  Sayfa1({super.key});
+Sayfa1({super.key});
 
   Controller controller = Get.find();
   @override
@@ -25,7 +25,7 @@ class Sayfa1 extends StatelessWidget {
               Get.snackbar('asda', 'dkfjgkldjgkldfjglkdfjglkdf');
             }, child: const Text('Snackbar')),
             ElevatedButton(onPressed: () {
-              Get.dialog(Text('data'));
+              Get.dialog(const Text('data'));
             }, child: const Text('Dialog')),
             ElevatedButton(onPressed: () {
               Get.defaultDialog(
